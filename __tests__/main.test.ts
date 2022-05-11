@@ -37,7 +37,7 @@ function wait(time: number): Promise<void> {
   })
 }
 
-test('test bundled restore runs', async () => {
+test.skip('test bundled restore runs', async () => {
   const np = process.execPath
   const ip = path.join(__dirname, '..', 'dist', 'restore', 'index.js')
   const options: cp.ExecFileSyncOptions = {
@@ -55,7 +55,7 @@ test('test bundled restore runs', async () => {
   // assert that config items are in GITHUB_ENV
 })
 
-test('test bundled save runs', async () => {
+test.skip('test bundled save runs', async () => {
   const np = process.execPath
   const ip = path.join(__dirname, '..', 'dist', 'save', 'index.js')
 
