@@ -24,8 +24,10 @@ export async function printConfig(): Promise<void> {
 export async function printStats(): Promise<Stats> {
   let output = ''
   await execBuildCacheWithoutImpersonation('-s', {
-    stdout: (data: Buffer) => {
-      output += data.toString()
+    listeners: {
+      stdout: (data: Buffer) => {
+        output += data.toString()
+      }
     }
   })
 
@@ -34,8 +36,8 @@ export async function printStats(): Promise<Stats> {
   }
 
   return {
-    entries: parseInt(get(`Entries in cache`, '0')),
-    misses: parseInt(get(`Misses`, '0'))
+    entries: parseInt(get(`Entries in cache`, '-1')),
+    misses: parseInt(get(`Misses`, '-1'))
   }
 }
 

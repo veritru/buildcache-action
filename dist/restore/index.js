@@ -67489,8 +67489,10 @@ function printStats() {
     return __awaiter(this, void 0, void 0, function* () {
         let output = '';
         yield execBuildCacheWithoutImpersonation('-s', {
-            stdout: (data) => {
-                output += data.toString();
+            listeners: {
+                stdout: (data) => {
+                    output += data.toString();
+                }
             }
         });
         const get = (name, def) => {
@@ -67498,8 +67500,8 @@ function printStats() {
             return ((_a = output.match(RegExp(`^  ${name}:\\s*(\\d+)$`, 'm'))) === null || _a === void 0 ? void 0 : _a[1]) || def;
         };
         return {
-            entries: parseInt(get(`Entries in cache`, '0')),
-            misses: parseInt(get(`Misses`, '0'))
+            entries: parseInt(get(`Entries in cache`, '-1')),
+            misses: parseInt(get(`Misses`, '-1'))
         };
     });
 }
